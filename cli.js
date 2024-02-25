@@ -22,25 +22,23 @@ async function socks(config) {
               const [VERSION, CMD, RSV, ATYP] = head;
               if (RSV != 0x00) return socks.end();
               if (VERSION != 0x05 || CMD != 0x01) return;
-              const host =
-                ATYP == 0x01
-                  ? head
-                      .slice(4, -2)
-                      .map((b) => parseInt(b, 10))
-                      .join(".")
-                  : ATYP == 0x04
-                  ? head
-                      .slice(4, -2)
-                      .reduce(
-                        (s, b, i, a) =>
-                          i % 2 ? s.concat(a.slice(i - 1, i + 1)) : s,
-                        []
-                      )
-                      .map((b) => b.readUInt16BE(0).toString(16))
-                      .join(":")
-                  : ATYP == 0x03
-                  ? head.slice(5, -2).toString("utf8")
-                  : "";
+              const host = ATYP == 0x01
+                ? head
+                  .slice(4, -2)
+                  .map((b) => parseInt(b, 10))
+                  .join(".")
+                : ATYP == 0x04
+                ? head
+                  .slice(4, -2)
+                  .reduce(
+                    (s, b, i, a) => i % 2 ? s.concat(a.slice(i - 1, i + 1)) : s,
+                    [],
+                  )
+                  .map((b) => b.readUInt16BE(0).toString(16))
+                  .join(":")
+                : ATYP == 0x03
+                ? head.slice(5, -2).toString("utf8")
+                : "";
               const port = head.slice(-2).readUInt16BE(0);
 
               new Promise((res, rej) => {
@@ -53,18 +51,17 @@ async function socks(config) {
                   const opts = {
                     headers: headers,
                   };
-                  /* 
+                  /*
 支持基本身份验证,用户名和密码 */
                   if (
                     config["server_username"] != null &&
                     config["server_password"]
                   ) {
-                    headers["Authorization"] =
-                      "Basic " +
+                    headers["Authorization"] = "Basic " +
                       btoa(
                         config["server_username"] +
                           ":" +
-                          config["server_password"]
+                          config["server_password"],
                       );
                   }
                   console.log(opts);
