@@ -1,0 +1,5 @@
+{
+    "server_url": "ws://localhost:8000",
+    "sport": 1080,
+    "sbind": "0.0.0.0"
+}

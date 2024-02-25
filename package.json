@@ -1,0 +1,28 @@
+{
+  "name": "cfpx",
+  "description": "A socks5 proxy server deployed on the Cloudflare Worker",
+  "bin": "cli.js",
+  "author": "DNetL",
+  "keywords": [
+    "proxy",
+    "tunnel",
+    "socks5",
+    "serverless",
+    "Cloudflare",
+    "Worker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DNetL/cfp-plus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DNetL/cfp-plus/issues"
+  },
+  "homepage": "https://github.com/DNetL/cfp-plus#readme",
+  "dependencies": {
+    "@types/ws": "^8.5.10",
+    "ws": "^8.2.3"
+  },
+  "version": "2.1.0",
+  "license": "MIT"
+}
